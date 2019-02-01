@@ -1,0 +1,63 @@
+{
+  "name": "time-maker",
+  "version": "0.0.1",
+  "author": "Amos Wong <amoswwj@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "time",
+    "chaining",
+    "milliseconds",
+    "seconds",
+    "minutes",
+    "hours",
+    "days",
+    "weeks",
+    "millisecond",
+    "second",
+    "minute",
+    "hour",
+    "day",
+    "week"
+  ],
+  "homepage": "https://github.com/amoshydra/time-maker",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:amoshydra/time-maker.git"
+  },
+  "scripts": {
+    "build": "rollup --config",
+    "test": "yarn run test:coverage",
+    "test:coverage": "nyc --reporter=lcovonly ava",
+    "test:unit": "ava"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "ava": "^1.0.0-rc.1",
+    "codecov": "^3.1.0",
+    "eslint": "^5.8.0",
+    "esm": "^3.0.84",
+    "live-server": "^1.2.0",
+    "nyc": "^13.1.0",
+    "rollup": "^0.66.6",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-babel-minify": "^6.1.1",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^3.4.0"
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ],
+    "files": [
+      "test/**/*.spec.js"
+    ],
+    "verbose": true
+  }
+}
