@@ -1,5 +1,5 @@
 {
-  "name": "@amoshydra/time-maker",
+  "name": "time-chainer",
   "version": "0.0.1",
   "author": "Amos Wong <amoswwj@gmail.com>",
   "license": "MIT",
@@ -19,10 +19,10 @@
     "day",
     "week"
   ],
-  "homepage": "https://github.com/amoshydra/time-maker",
+  "homepage": "https://github.com/amoshydra/time-chainer",
   "repository": {
     "type": "git",
-    "url": "git@github.com:amoshydra/time-maker.git"
+    "url": "git@github.com:amoshydra/time-chainer.git"
   },
   "scripts": {
     "build": "rollup --config",
