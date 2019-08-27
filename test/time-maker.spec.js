@@ -79,3 +79,24 @@ test('instance methods should produce instance of T', t => {
   t.true(new T().days(1) instanceof T);
   t.true(new T().weeks(1) instanceof T);
 });
+
+// Type coercion
+test('stringification should produce number string', t => {
+  t.is(
+    JSON.stringify({
+      time: T.seconds(0),
+    }),
+    JSON.stringify({
+      time: 0,
+    })
+  );
+
+  t.not(
+    JSON.stringify({
+      time: T.seconds(0),
+    }),
+    JSON.stringify({
+      time: '0',
+    })
+  );
+});
