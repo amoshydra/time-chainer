@@ -1,5 +1,5 @@
 # Time Chainer
-Create your miliseconds declaratively!
+Create your milliseconds declaratively!
 
 [![CircleCI](https://circleci.com/gh/amoshydra/time-chainer.svg?style=svg)](https://circleci.com/gh/amoshydra/time-chainer)
 [![Known Vulnerabilities](https://snyk.io/test/github/amoshydra/time-chainer/badge.svg?targetFile=package.json)](https://snyk.io/test/github/amoshydra/time-chainer?targetFile=package.json)
