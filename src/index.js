@@ -6,9 +6,6 @@ export default class Time extends Number {
   valueOf() {
     return this.value;
   }
-  toString() {
-    return `${this.value}`;
-  }
 
   // Static methods
   static milliseconds(ms) { return new Time(ms); }
