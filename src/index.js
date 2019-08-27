@@ -7,7 +7,7 @@ export default class Time extends Number {
     return this.value;
   }
   toString() {
-    return this.value;
+    return `${this.value}`;
   }
 
   // Static methods
