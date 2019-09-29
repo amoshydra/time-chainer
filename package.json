@@ -1,6 +1,6 @@
 {
   "name": "time-chainer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Amos Wong <amoswwj@gmail.com>",
   "license": "MIT",
   "keywords": [
@@ -36,8 +36,7 @@
     "dist",
     "types/*.d.ts"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
