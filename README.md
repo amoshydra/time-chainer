@@ -29,7 +29,7 @@ import Time from 'time-chainer';
 setTimeout(() => {
   doSomething();
 
-}, Time.seconds(5));
+}, +Time.seconds(5));
 
 // 3 Days and 12 hours later from now
 new Date(
@@ -49,4 +49,20 @@ Time
   .days(15)
   .weeks(1)
 ; // 1,945,830,500
+```
+
+## `TimeChainer` extends `Number`
+
+Time Chainer extends `Number` object. In cases where a primitive number is strictly required, you will need to explicitly convert it to a primitive `number` by appending a `+` operator like this:
+
+```js
+jest.advanceTimersByTime(+Time.days(30));
+```
+
+See details:
+
+```js
+Time.seconds(5) instanceof Number // true
+typeof Time.seconds(5) // "object"
+typeof +Time.seconds(5) // "number"
 ```
