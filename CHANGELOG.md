@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/amoshydra/time-chainer/compare/v0.1.0...v0.1.1) (2024-04-07)
+
+
+### Bug Fixes
+
+* expose named export Time, force cjs creation of default named export ([f145b05](https://github.com/amoshydra/time-chainer/commit/f145b05339f6216be517fe2e19ba8a8e81f9080d))
+
 ## [0.1.0](https://github.com/amoshydra/time-chainer/compare/v0.0.3...v0.1.0) (2024-04-07)
 
 
