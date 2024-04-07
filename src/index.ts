@@ -50,4 +50,7 @@ class Time extends Number {
   }
 }
 
-export default Time as unknown as TimeReturn;
+const TimeReturn = Time as unknown as TimeReturn;
+
+export default TimeReturn;
+export { TimeReturn as Time };

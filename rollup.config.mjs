@@ -7,7 +7,7 @@ import pkg from './package.json' assert { type: "json" };
  */
 const commonOutput = {
   sourcemap: true,
-  interop: "defaultOnly",
+  interop: "compat",
 }
 
 /**
