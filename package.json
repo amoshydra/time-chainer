@@ -26,40 +26,25 @@
   },
   "scripts": {
     "build": "rollup --config",
-    "test": "yarn run test:coverage",
-    "test:coverage": "nyc --reporter=lcovonly ava",
-    "test:unit": "ava"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
+  "browser": "dist/index.umd.js",
+  "typings": "dist/index.d.ts",
   "files": [
-    "dist",
-    "types/*.d.ts"
+    "dist"
   ],
   "dependencies": {},
   "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
-    "ava": "^1.0.0-rc.1",
-    "codecov": "^3.7.1",
-    "eslint": "^5.8.0",
-    "esm": "^3.0.84",
-    "live-server": "^1.2.0",
-    "nyc": "^13.1.0",
-    "rollup": "^0.66.6",
-    "rollup-plugin-babel": "^4.0.3",
-    "rollup-plugin-babel-minify": "^6.1.1",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^3.4.0"
-  },
-  "typings": "types/index.d.ts",
-  "ava": {
-    "require": [
-      "esm"
-    ],
-    "files": [
-      "test/**/*.spec.js"
-    ],
-    "verbose": true
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/jest": "^29.5.12",
+    "eslint": "^9.0.0",
+    "jest": "^29.7.0",
+    "rollup": "^4.14.1",
+    "ts-jest": "^29.1.2",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.4"
   }
 }
