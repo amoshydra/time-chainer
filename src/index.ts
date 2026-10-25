@@ -13,16 +13,16 @@ class Time extends Number {
   }
 
   valueOf() {
-    return this.value as number;
+    return this.value;
   }
 
   // Static methods
   static milliseconds(ms?: T) { return new Time(ms) as TimeReturn; }
-  static seconds(s?: T) { return Time.milliseconds(s as N * 1000) as TimeReturn; }
-  static minutes(m?: T) { return Time.seconds(m as N * 60) as TimeReturn; }
-  static hours(h?: T) { return Time.minutes(h as N * 60) as TimeReturn; }
-  static days(d?: T) { return Time.hours(d as N * 24) as TimeReturn; }
-  static weeks(w?: T) { return Time.days(w as N * 7) as TimeReturn; }
+  static seconds(s?: T) { return Time.milliseconds((s as N) * 1000) as TimeReturn; }
+  static minutes(m?: T) { return Time.seconds((m as N) * 60) as TimeReturn; }
+  static hours(h?: T) { return Time.minutes((h as N) * 60) as TimeReturn; }
+  static days(d?: T) { return Time.hours((d as N) * 24) as TimeReturn; }
+  static weeks(w?: T) { return Time.days((w as N) * 7) as TimeReturn; }
 
   // Instance methods
   milliseconds(ms?: T) {
@@ -51,7 +51,5 @@ class Time extends Number {
   }
 }
 
-const TimeReturn = Time as unknown as TimeReturn;
-
-export default TimeReturn;
-export { TimeReturn as Time };
+export default Time;
+export { Time };

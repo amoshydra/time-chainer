@@ -1,64 +1,72 @@
-// @ts-check
 import { expect, it } from 'vitest';
-import T from './index';
-
-const ZERO = 0;
+import T, { Time } from './index';
 
 // Usage testing
-it('should output correct value with its static method', () => {
-  expect(ZERO).toBe( T.milliseconds(1) - (1));
-  expect(ZERO).toBe(      T.seconds(1) - (1000));
-  expect(ZERO).toBe(      T.minutes(1) - (60 * 1000));
-  expect(ZERO).toBe(        T.hours(1) - (60 * 60 * 1000));
-  expect(ZERO).toBe(         T.days(1) - (24 * 60 * 60 * 1000));
-  expect(ZERO).toBe(        T.weeks(1) - (7 * 24 * 60 * 60 * 1000));
+it('should output correct value with its static methods', () => {
+  expect(+T.milliseconds(1)).toBe(1);
+  expect(+T.seconds(1)).toBe(1000);
+  expect(+T.minutes(1)).toBe(60 * 1000);
+  expect(+T.hours(1)).toBe(60 * 60 * 1000);
+  expect(+T.days(1)).toBe(24 * 60 * 60 * 1000);
+  expect(+T.weeks(1)).toBe(7 * 24 * 60 * 60 * 1000);
 });
 
-it('should output 0 when 0 given as param', () => {
-  expect(ZERO).toBe( T.milliseconds(0) - ZERO);
-  expect(ZERO).toBe(      T.seconds(0) - ZERO);
-  expect(ZERO).toBe(      T.minutes(0) - ZERO);
-  expect(ZERO).toBe(        T.hours(0) - ZERO);
-  expect(ZERO).toBe(         T.days(0) - ZERO);
-  expect(ZERO).toBe(        T.weeks(0) - ZERO);
+it('should output 0 when 0 is given as param', () => {
+  expect(+T.milliseconds(0)).toBe(0);
+  expect(+T.seconds(0)).toBe(0);
+  expect(+T.minutes(0)).toBe(0);
+  expect(+T.hours(0)).toBe(0);
+  expect(+T.days(0)).toBe(0);
+  expect(+T.weeks(0)).toBe(0);
 });
 
-it('should output 0 when nothing given as param', () => {
-  expect(ZERO).toBe( T.milliseconds() - ZERO);
-  expect(ZERO).toBe(      T.seconds() - ZERO);
-  expect(ZERO).toBe(      T.minutes() - ZERO);
-  expect(ZERO).toBe(        T.hours() - ZERO);
-  expect(ZERO).toBe(         T.days() - ZERO);
-  expect(ZERO).toBe(        T.weeks() - ZERO);
+it('should output 0 when nothing is given as param', () => {
+  expect(+T.milliseconds()).toBe(0);
+  expect(+T.seconds()).toBe(0);
+  expect(+T.minutes()).toBe(0);
+  expect(+T.hours()).toBe(0);
+  expect(+T.days()).toBe(0);
+  expect(+T.weeks()).toBe(0);
 
-  expect(ZERO).toBe( T.milliseconds(undefined) - ZERO);
-  expect(ZERO).toBe(      T.seconds(undefined) - ZERO);
-  expect(ZERO).toBe(      T.minutes(undefined) - ZERO);
-  expect(ZERO).toBe(        T.hours(undefined) - ZERO);
-  expect(ZERO).toBe(         T.days(undefined) - ZERO);
-  expect(ZERO).toBe(        T.weeks(undefined) - ZERO);
+  expect(+T.milliseconds(undefined)).toBe(0);
+  expect(+T.seconds(undefined)).toBe(0);
+  expect(+T.minutes(undefined)).toBe(0);
+  expect(+T.hours(undefined)).toBe(0);
+  expect(+T.days(undefined)).toBe(0);
+  expect(+T.weeks(undefined)).toBe(0);
 
-  expect(ZERO).toBe( T.milliseconds(null) - ZERO);
-  expect(ZERO).toBe(      T.seconds(null) - ZERO);
-  expect(ZERO).toBe(      T.minutes(null) - ZERO);
-  expect(ZERO).toBe(        T.hours(null) - ZERO);
-  expect(ZERO).toBe(         T.days(null) - ZERO);
-  expect(ZERO).toBe(        T.weeks(null) - ZERO);
+  expect(+T.milliseconds(null)).toBe(0);
+  expect(+T.seconds(null)).toBe(0);
+  expect(+T.minutes(null)).toBe(0);
+  expect(+T.hours(null)).toBe(0);
+  expect(+T.days(null)).toBe(0);
+  expect(+T.weeks(null)).toBe(0);
 });
 
 it('should work with chaining', () => {
-  const OF_8_DAYS = (8 * (24 * 60 * 60 * 1000));
+  const OF_8_DAYS = 8 * (24 * 60 * 60 * 1000);
 
-  expect(ZERO).toBe( T.weeks(1).days(1) - OF_8_DAYS);
+  expect(+T.weeks(1).days(1)).toBe(OF_8_DAYS);
 });
 
 it('should allow 0 or nothing during chaining', () => {
-  const OF_8_DAYS = (8 * (24 * 60 * 60 * 1000));
+  const OF_8_DAYS = 8 * (24 * 60 * 60 * 1000);
 
-  expect(ZERO).toBe( T.weeks(1).days(0        ).days(1) - OF_8_DAYS);
-  expect(ZERO).toBe( T.weeks(1).days(         ).days(1) - OF_8_DAYS);
-  expect(ZERO).toBe( T.weeks(1).days(null     ).days(1) - OF_8_DAYS);
-  expect(ZERO).toBe( T.weeks(1).days(undefined).days(1) - OF_8_DAYS);
+  expect(+T.weeks(1).days(0).days(1)).toBe(OF_8_DAYS);
+  expect(+T.weeks(1).days().days(1)).toBe(OF_8_DAYS);
+  expect(+T.weeks(1).days(null).days(1)).toBe(OF_8_DAYS);
+  expect(+T.weeks(1).days(undefined).days(1)).toBe(OF_8_DAYS);
+});
+
+it('should accept boxed numbers and Time values', () => {
+  expect(+T.milliseconds(Object(42))).toBe(42);
+  expect(+T.milliseconds(T.seconds(1))).toBe(1000);
+});
+
+it('should expose the same constructor as default and named exports', () => {
+  expect(Time).toBe(T);
+  expect(new T()).toBeInstanceOf(Time);
+  expect(new T(500).valueOf()).toBe(500);
 });
 
 // Implementation Assertions
@@ -73,20 +81,11 @@ it('static methods should produce instance of T', () => {
 
 // Implementation Assertions
 it('instance methods should produce instance of T', () => {
-  // The following produce type error
-  // but should still be allowed in non-typescript environment
-
-  // @ts-expect-error -- instance methods are intentionally absent from the constructor type
   expect(new T().milliseconds(1)).toBeInstanceOf(T);
-  // @ts-expect-error -- instance methods are intentionally absent from the constructor type
   expect(new T().seconds(1)).toBeInstanceOf(T);
-  // @ts-expect-error -- instance methods are intentionally absent from the constructor type
   expect(new T().minutes(1)).toBeInstanceOf(T);
-  // @ts-expect-error -- instance methods are intentionally absent from the constructor type
   expect(new T().hours(1)).toBeInstanceOf(T);
-  // @ts-expect-error -- instance methods are intentionally absent from the constructor type
   expect(new T().days(1)).toBeInstanceOf(T);
-  // @ts-expect-error -- instance methods are intentionally absent from the constructor type
   expect(new T().weeks(1)).toBeInstanceOf(T);
 });
 
@@ -109,6 +108,16 @@ it('stringification should produce number string', () => {
   ).not.toBe(
     JSON.stringify({
       time: '0',
+    })
+  );
+
+  expect(
+    JSON.stringify({
+      time: T.seconds(1).minutes(1),
+    })
+  ).toBe(
+    JSON.stringify({
+      time: 61000,
     })
   );
 });
