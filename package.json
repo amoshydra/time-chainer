@@ -1,6 +1,6 @@
 {
   "name": "time-chainer",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Create milliseconds declaratively",
   "author": "Amos Wong <amoswwj@gmail.com>",
   "license": "MIT",

@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0](https://github.com/amoshydra/time-chainer/compare/v0.1.2...v0.2.0) (2026-10-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* the package is now ESM-first and exposes a new exports map. The CJS entry point moves to dist/index.cjs, and deep imports outside the exported paths are no longer supported.
+
+### Features
+
+* modernize build and development stack ([fee0bd2](https://github.com/amoshydra/time-chainer/commit/fee0bd299d08de68e506e8ff11f2b2c541bfff8a))
+
 ## [0.1.2](https://github.com/amoshydra/time-chainer/compare/v0.1.1...v0.1.2) (2026-10-25)
 
 
