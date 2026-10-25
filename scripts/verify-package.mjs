@@ -80,6 +80,9 @@ const milliseconds: number = Time.seconds(1);
 const constructed: NamedTime = new Time(500);
 const named: Time = new NamedTime(500);
 
+// @ts-expect-error -- value is readonly
+constructed.value = 0;
+
 console.log(milliseconds, constructed, named);
 `,
   );

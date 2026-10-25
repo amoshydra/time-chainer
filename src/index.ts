@@ -5,11 +5,12 @@ type N = number;
 type TimeReturn = Time & number;
 
 class Time extends Number {
-  public value = 0;
+  public readonly value: number;
 
   constructor(ms?: T) {
-    super(ms);
-    this.value = +(ms as number) || 0;
+    const value = +(ms as number) || 0;
+    super(value);
+    this.value = value;
   }
 
   valueOf() {
@@ -26,28 +27,22 @@ class Time extends Number {
 
   // Instance methods
   milliseconds(ms?: T) {
-    this.value += Time.milliseconds(ms).value;
-    return this as unknown as TimeReturn;
+    return new Time(this.value + Time.milliseconds(ms).value) as TimeReturn;
   }
   seconds(s?: T) {
-    this.value += Time.seconds(s).value;
-    return this as unknown as TimeReturn;
+    return new Time(this.value + Time.seconds(s).value) as TimeReturn;
   }
   minutes(m?: T) {
-    this.value += Time.minutes(m).value;
-    return this as unknown as TimeReturn;
+    return new Time(this.value + Time.minutes(m).value) as TimeReturn;
   }
   hours(h?: T) {
-    this.value += Time.hours(h).value;
-    return this as unknown as TimeReturn;
+    return new Time(this.value + Time.hours(h).value) as TimeReturn;
   }
   days(d?: T) {
-    this.value += Time.days(d).value;
-    return this as unknown as TimeReturn;
+    return new Time(this.value + Time.days(d).value) as TimeReturn;
   }
   weeks(w?: T) {
-    this.value += Time.weeks(w).value;
-    return this as unknown as TimeReturn;
+    return new Time(this.value + Time.weeks(w).value) as TimeReturn;
   }
 }
 
