@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Release tag to publish (for retrying a failed publish)'
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -20,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run release-please
+        if: ${{ github.event_name == 'push' }}
         id: release
         uses: googleapis/release-please-action@v4
         with:
@@ -36,15 +43,22 @@ jobs:
           ref: ${{ steps.release.outputs.sha }}
           fetch-depth: 0
 
+      - name: Checkout release tag for retry
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+          fetch-depth: 0
+
       - name: Install pnpm
-        if: ${{ steps.release.outputs.release_created == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.release.outputs.release_created == 'true' }}
         uses: pnpm/action-setup@v4
         with:
           version: 10.33.2
           run_install: false
 
       - name: Install Node.js
-        if: ${{ steps.release.outputs.release_created == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.release.outputs.release_created == 'true' }}
         uses: actions/setup-node@v4
         with:
           # Trusted publishing requires Node 22.14+ and npm CLI 11.5.1+.
@@ -53,31 +67,64 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
-        if: ${{ steps.release.outputs.release_created == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.release.outputs.release_created == 'true' }}
         run: pnpm install --frozen-lockfile
 
       - name: Test
-        if: ${{ steps.release.outputs.release_created == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.release.outputs.release_created == 'true' }}
         run: pnpm test
 
       - name: Type check
-        if: ${{ steps.release.outputs.release_created == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.release.outputs.release_created == 'true' }}
         run: pnpm run type-check
 
       - name: Lint
-        if: ${{ steps.release.outputs.release_created == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.release.outputs.release_created == 'true' }}
         run: pnpm run lint
 
       - name: Build
-        if: ${{ steps.release.outputs.release_created == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.release.outputs.release_created == 'true' }}
         run: pnpm run build
 
       - name: Validate package
-        if: ${{ steps.release.outputs.release_created == 'true' }}
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.release.outputs.release_created == 'true' }}
         run: pnpm run lint:package
 
+      - name: Validate package types
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.release.outputs.release_created == 'true' }}
+        run: pnpm run lint:types
+
+      - name: Verify packed package
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.release.outputs.release_created == 'true' }}
+        run: pnpm run test:package
+
+      - name: Check npm for existing version
+        id: npm
+        if: ${{ github.event_name == 'workflow_dispatch' || steps.release.outputs.release_created == 'true' }}
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          VERSION="$(node -p "require('./package.json').version")"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+          if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
+            TAG_VERSION="${RELEASE_TAG#v}"
+
+            if [ "$TAG_VERSION" != "$VERSION" ]; then
+              echo "::error::Tag ${RELEASE_TAG} does not match package.json version ${VERSION}"
+              exit 1
+            fi
+          fi
+
+          if npm view "time-chainer@$VERSION" version >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "time-chainer@$VERSION is already published; skipping publish."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Publish to npm
-        if: ${{ steps.release.outputs.release_created == 'true' }}
+        if: ${{ (github.event_name == 'workflow_dispatch' || steps.release.outputs.release_created == 'true') && steps.npm.outputs.exists != 'true' }}
         # Trusted publishing authenticates with OIDC and generates provenance
         # automatically. NPM_TOKEN is intentionally not used here.
         run: npm publish --access public
