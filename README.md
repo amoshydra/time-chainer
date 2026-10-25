@@ -46,6 +46,9 @@ Time
 ; // 1,945,830,500
 ```
 
+Each chaining method returns a new `Time`; the value it was called on is
+unchanged.
+
 ## `TimeChainer` extends `Number`
 
 Time Chainer extends `Number` object. In cases where a primitive number is strictly required, you will need to explicitly convert it to a primitive `number` by appending a `+` operator like this:
@@ -83,8 +86,8 @@ Development uses Node.js 24.11+ or 26+.
 ## Upgrading
 
 See [MIGRATION.md](https://github.com/amoshydra/time-chainer/blob/master/MIGRATION.md)
-for migration notes, including the 0.2.0 packaging changes and the planned
-0.3.0 behavior changes.
+for migration notes, including the 0.2.0 packaging changes and the 0.3.0
+behavior changes.
 
 ## Development
 
