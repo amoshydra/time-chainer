@@ -35,13 +35,15 @@
     }
   },
   "scripts": {
-    "build": "tsdown",
+    "build": "tsdown && node scripts/strip-dts-sourcemaps.mjs",
     "dev": "tsdown --watch",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:package": "node scripts/verify-package.mjs",
     "lint": "eslint .",
-    "type-check": "tsc --noEmit",
-    "lint:package": "publint"
+    "lint:package": "publint",
+    "lint:types": "attw --pack .",
+    "type-check": "tsc --noEmit"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -67,6 +69,7 @@
     "dist"
   ],
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
     "@eslint/js": "^10.0.1",
     "@types/node": "^24.19.2",
     "eslint": "^10.13.0",

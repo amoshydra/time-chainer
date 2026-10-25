@@ -17,6 +17,13 @@ pnpm-debug.log*
 
 # Environment
 .env
+.env.*
+!.env.example
+
+# Tooling
+.eslintcache
+.pnpm-store/
+*.tsbuildinfo
 
 # OS / editor
 .DS_Store

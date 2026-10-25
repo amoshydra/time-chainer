@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2016",
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "lib": ["ES2020"],
+    "lib": ["ES2016"],
     "types": ["node"],
     "strict": true,
     "skipLibCheck": true,
