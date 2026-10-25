@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-wrapper-object-types -- preserve support for boxed Number values
 type T = number | Number | Time | null | undefined;
 type N = number;
 

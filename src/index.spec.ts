@@ -1,4 +1,5 @@
 // @ts-check
+import { expect, it } from 'vitest';
 import T from './index';
 
 const ZERO = 0;
@@ -75,17 +76,17 @@ it('instance methods should produce instance of T', () => {
   // The following produce type error
   // but should still be allowed in non-typescript environment
 
-  // @ts-ignore
+  // @ts-expect-error -- instance methods are intentionally absent from the constructor type
   expect(new T().milliseconds(1)).toBeInstanceOf(T);
-  // @ts-ignore
+  // @ts-expect-error -- instance methods are intentionally absent from the constructor type
   expect(new T().seconds(1)).toBeInstanceOf(T);
-  // @ts-ignore
+  // @ts-expect-error -- instance methods are intentionally absent from the constructor type
   expect(new T().minutes(1)).toBeInstanceOf(T);
-  // @ts-ignore
+  // @ts-expect-error -- instance methods are intentionally absent from the constructor type
   expect(new T().hours(1)).toBeInstanceOf(T);
-  // @ts-ignore
+  // @ts-expect-error -- instance methods are intentionally absent from the constructor type
   expect(new T().days(1)).toBeInstanceOf(T);
-  // @ts-ignore
+  // @ts-expect-error -- instance methods are intentionally absent from the constructor type
   expect(new T().weeks(1)).toBeInstanceOf(T);
 });
 
