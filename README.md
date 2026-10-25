@@ -99,6 +99,7 @@ for the full development and release process.
 pnpm install
 pnpm test
 pnpm run test:watch
+pnpm run test:coverage
 pnpm run type-check
 pnpm run lint
 pnpm run build

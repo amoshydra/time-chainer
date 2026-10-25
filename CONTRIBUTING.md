@@ -8,6 +8,7 @@ Development requires Node.js 24.11+ or 26+ and pnpm 10.33.2+.
 pnpm install
 pnpm test
 pnpm run test:watch
+pnpm run test:coverage
 pnpm run type-check
 pnpm run lint
 pnpm run build
@@ -16,9 +17,12 @@ pnpm run lint:package
 pnpm run lint:types
 ```
 
-`test:package` verifies the packed tarball, including ESM, CommonJS, UMD, and
-the published TypeScript declarations. `lint:types` checks package type
-resolution with `@arethetypeswrong/cli`. Both require a build first.
+`test:coverage` writes HTML and JSON coverage reports to `coverage/`. CI runs
+coverage on Node 24, publishes the HTML report as an artifact, and writes a
+coverage summary to the workflow job summary. `test:package` verifies the
+packed tarball, including ESM, CommonJS, UMD, and the published TypeScript
+declarations. `lint:types` checks package type resolution with
+`@arethetypeswrong/cli`. Both package checks require a build first.
 
 ## Commit messages
 
