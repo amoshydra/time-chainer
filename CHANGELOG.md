@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/amoshydra/time-chainer/compare/v0.2.0...v0.2.1) (2026-10-25)
+
+
+### Bug Fixes
+
+* use the ESM entry for browser consumers ([808cdd1](https://github.com/amoshydra/time-chainer/commit/808cdd1f152148b7a4a49735f720afdb8284e8a4))
+
 ## [0.2.0](https://github.com/amoshydra/time-chainer/compare/v0.1.2...v0.2.0) (2026-10-25)
 
 
