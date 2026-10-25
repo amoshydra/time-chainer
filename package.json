@@ -45,7 +45,6 @@
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "browser": "./dist/index.umd.js",
   "unpkg": "./dist/index.umd.js",
   "jsdelivr": "./dist/index.umd.js",
   "types": "./dist/index.d.ts",
