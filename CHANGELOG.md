@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/amoshydra/time-chainer/compare/v0.1.1...v0.1.2) (2026-10-25)
+
+
+### Bug Fixes
+
+* build on modern Node and publish repository metadata ([9331787](https://github.com/amoshydra/time-chainer/commit/933178743bd0ca3816e6d4036333f32b05a703eb))
+
 ## [0.1.1](https://github.com/amoshydra/time-chainer/compare/v0.1.0...v0.1.1) (2024-04-07)
 
 
