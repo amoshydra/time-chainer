@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0](https://github.com/amoshydra/time-chainer/compare/v0.2.2...v0.3.0) (2026-10-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* chaining methods now return a new Time instead of mutating the receiver, and the value property is readonly.
+
+### Features
+
+* make Time chaining immutable ([063d9bf](https://github.com/amoshydra/time-chainer/commit/063d9bf396cd8a9b77ddb04d882565e337b10fac))
+
 ## [0.2.2](https://github.com/amoshydra/time-chainer/compare/v0.2.1...v0.2.2) (2026-10-25)
 
 
