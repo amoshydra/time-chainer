@@ -22,7 +22,7 @@
   "homepage": "https://github.com/amoshydra/time-chainer",
   "repository": {
     "type": "git",
-    "url": "git@github.com:amoshydra/time-chainer.git"
+    "url": "git+https://github.com/amoshydra/time-chainer.git"
   },
   "scripts": {
     "build": "rollup --config",
