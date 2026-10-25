@@ -67,9 +67,78 @@ typeof Time.seconds(5) // "object"
 typeof +Time.seconds(5) // "number"
 ```
 
+## Upgrading from 0.1.x
+
+Version 0.2.0 is ESM-first and adds an explicit `exports` map. The public
+default and named API is unchanged.
+
+### Import from the package root
+
+ESM:
+
+```js
+import Time from 'time-chainer';
+import { Time as TimeClass } from 'time-chainer';
+```
+
+CommonJS:
+
+```js
+const Time = require('time-chainer').default;
+const { Time: TimeClass } = require('time-chainer');
+```
+
+### Replace deep imports
+
+Deep imports into `dist/` are no longer supported.
+
+ESM:
+
+```js
+// 0.1.x
+import Time from 'time-chainer/dist/index.esm.js';
+
+// 0.2.x
+import Time from 'time-chainer';
+```
+
+CommonJS:
+
+```js
+// 0.1.x
+const { default: Time } = require('time-chainer/dist/index.js');
+
+// 0.2.x
+const { default: Time } = require('time-chainer');
+```
+
+Use the package name for TypeScript imports as well:
+
+```ts
+import Time, { Time as TimeClass } from 'time-chainer';
+```
+
+### Browser script
+
+The UMD build remains available for direct browser usage. It exposes the
+`timeMaker` global:
+
+```html
+<script src="https://unpkg.com/time-chainer@0.2.0/dist/index.umd.js"></script>
+<script>
+  const Time = timeMaker.default;
+  console.log(+Time.seconds(1));
+</script>
+```
+
+### Node.js support
+
+The published package does not declare a consumer `engines.node` restriction.
+Development uses Node.js 24.11+ or 26+.
+
 ## Development
 
-Development requires Node.js 24 LTS or newer (Node 26 is supported) and pnpm 10.33.2+.
+Development requires Node.js 24.11+ or 26+ and pnpm 10.33.2+.
 
 ```sh
 pnpm install
