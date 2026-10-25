@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2](https://github.com/amoshydra/time-chainer/compare/v0.2.1...v0.2.2) (2026-10-25)
+
+
+### Bug Fixes
+
+* expose Time as a constructable export ([1221a98](https://github.com/amoshydra/time-chainer/commit/1221a982b344e02420e05eca7b24d4bcf08f8abf))
+* repair declaration maps and verify package artifacts ([b2fd7ee](https://github.com/amoshydra/time-chainer/commit/b2fd7eebe492a16f30f5f04adce0ec498b1354b6))
+
 ## [0.2.1](https://github.com/amoshydra/time-chainer/compare/v0.2.0...v0.2.1) (2026-10-25)
 
 
