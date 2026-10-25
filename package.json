@@ -1,8 +1,10 @@
 {
   "name": "time-chainer",
   "version": "0.1.2",
+  "description": "Create milliseconds declaratively",
   "author": "Amos Wong <amoswwj@gmail.com>",
   "license": "MIT",
+  "type": "module",
   "keywords": [
     "time",
     "chaining",
@@ -24,27 +26,55 @@
     "type": "git",
     "url": "git+https://github.com/amoshydra/time-chainer.git"
   },
-  "scripts": {
-    "build": "rollup --config",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+  "packageManager": "pnpm@10.33.2",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^24.11.0 || >=26.0.0",
+      "onFail": "error"
+    }
   },
-  "main": "dist/index.js",
-  "module": "dist/index.esm.js",
-  "browser": "dist/index.umd.js",
-  "typings": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "type-check": "tsc --noEmit"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "browser": "./dist/index.umd.js",
+  "unpkg": "./dist/index.umd.js",
+  "jsdelivr": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      },
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": false,
   "files": [
     "dist"
   ],
-  "dependencies": {},
   "devDependencies": {
-    "@rollup/plugin-terser": "^0.4.4",
-    "@rollup/plugin-typescript": "^11.1.6",
-    "@types/jest": "^29.5.12",
-    "eslint": "^9.0.0",
-    "jest": "^29.7.0",
-    "rollup": "^4.22.4",
-    "ts-jest": "^29.1.2",
-    "tslib": "^2.6.2",
-    "typescript": "^5.4.4"
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.19.2",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "tsdown": "^0.23.2",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.0",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
   }
 }
