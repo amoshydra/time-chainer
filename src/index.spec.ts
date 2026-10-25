@@ -58,6 +58,49 @@ it('should allow 0 or nothing during chaining', () => {
   expect(+T.weeks(1).days(undefined).days(1)).toBe(OF_8_DAYS);
 });
 
+it('should not mutate the receiver when chaining', () => {
+  const base = T.milliseconds(1000);
+  const chained = [
+    base.milliseconds(1),
+    base.seconds(1),
+    base.minutes(1),
+    base.hours(1),
+    base.days(1),
+    base.weeks(1),
+  ];
+
+  expect(chained.map(Number)).toEqual([
+    1001,
+    2000,
+    61_000,
+    3_601_000,
+    86_401_000,
+    604_801_000,
+  ]);
+  expect(chained.every((value) => value !== base)).toBe(true);
+  expect(+base).toBe(1000);
+});
+
+it('should keep the boxed value and formatting in sync', () => {
+  expect(new T().value).toBe(0);
+  expect(new T(NaN).value).toBe(0);
+  expect(String(new T())).toBe('0');
+  expect(String(T.milliseconds())).toBe('0');
+  expect(String(T.seconds(undefined))).toBe('0');
+  expect(String(T.seconds(NaN))).toBe('0');
+
+  const chained = T.seconds(1).minutes(1);
+
+  expect(chained.value).toBe(61_000);
+  expect(+chained).toBe(61_000);
+  expect(Number(chained)).toBe(61_000);
+  expect(String(chained)).toBe('61000');
+  expect(`${chained}`).toBe('61000');
+  expect(chained.toFixed(0)).toBe('61000');
+  expect(Number.prototype.toString.call(chained)).toBe('61000');
+  expect(JSON.stringify(chained)).toBe('61000');
+});
+
 it('should accept boxed numbers and Time values', () => {
   expect(+T.milliseconds(Object(42))).toBe(42);
   expect(+T.milliseconds(T.seconds(1))).toBe(1000);
@@ -77,6 +120,7 @@ it('static methods should produce instance of T', () => {
   expect(T.hours(1)).toBeInstanceOf(T);
   expect(T.days(1)).toBeInstanceOf(T);
   expect(T.weeks(1)).toBeInstanceOf(T);
+  expect(T.seconds(1)).toBeInstanceOf(Number);
 });
 
 // Implementation Assertions
