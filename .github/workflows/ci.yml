@@ -46,3 +46,6 @@ jobs:
 
       - name: Build
         run: pnpm run build
+
+      - name: Validate package
+        run: pnpm run lint:package

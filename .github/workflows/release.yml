@@ -72,6 +72,10 @@ jobs:
         if: ${{ steps.release.outputs.release_created == 'true' }}
         run: pnpm run build
 
+      - name: Validate package
+        if: ${{ steps.release.outputs.release_created == 'true' }}
+        run: pnpm run lint:package
+
       - name: Publish to npm
         if: ${{ steps.release.outputs.release_created == 'true' }}
         # Trusted publishing authenticates with OIDC and generates provenance

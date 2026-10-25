@@ -40,7 +40,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "lint": "eslint .",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "lint:package": "publint"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -71,6 +72,7 @@
     "@types/node": "^24.19.2",
     "eslint": "^10.13.0",
     "globals": "^17.13.0",
+    "publint": "^0.3.25",
     "tsdown": "^0.23.2",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.0",
