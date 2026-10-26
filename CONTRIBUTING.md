@@ -17,9 +17,10 @@ pnpm run lint:package
 pnpm run lint:types
 ```
 
-`test:coverage` writes HTML and JSON coverage reports to `coverage/`. CI runs
-coverage on Node 24, publishes the HTML report as an artifact, and writes a
-coverage summary to the workflow job summary. `test:package` verifies the
+`test:coverage` writes HTML and JSON coverage reports to `coverage/` and
+enforces 100% lines, statements, functions, and branches for every source file.
+CI runs coverage on Node 24, publishes the HTML report as an artifact, and
+writes a coverage summary to the workflow job summary. `test:package` verifies the
 packed tarball, including ESM, CommonJS, UMD, and the published TypeScript
 declarations. `lint:types` checks package type resolution with
 `@arethetypeswrong/cli`. Both package checks require a build first.
